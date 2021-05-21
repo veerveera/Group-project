@@ -21,6 +21,10 @@ class Package{
     void setCurrentCoord(int coord){
       currentCoord = coord
     };
+
+    void getCurrentCoord(){return currentCoord};
+    void getFinishCoord(){return finishCoord};
+    void getDirection(){return direction};
   }
 
 #endif
