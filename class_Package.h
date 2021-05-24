@@ -32,3 +32,55 @@ class Package{
     string getRecipientName(){return recipientName;};
     string getSenderName(){return senderName;};
   };
+
+
+class Office{
+
+private:
+        int num; //номер отделения
+        int Coord; //координата отделения
+        int *pack; //массив из номеров посылок, которые есть в этом отделении
+public:
+
+	office(){
+		Coord = 0;
+		num = 0;
+	}
+	office(int tmp_num, int tmp_Coord, Package* P, int n){
+		num = tmp_num;
+		Coord = tmp_Coord;
+		pack = new int[n];
+		for(int i=0; i<n; i++){
+			if P[i].getCurrentCoord() == Coord{
+                                pack[i] = i+1;
+                        }
+                        else{
+                                pack[i] = 0;
+                        }
+
+		}
+	}
+	~office(){}
+
+	int getCoord(){return Coord;}
+	int* getPack(){return pack;}
+	int getNum(){return num;}
+
+	void SetPack(Package* P, int n){
+		pack = new int[n];
+        	for(int i=0; i<n; i++){
+			if P[i].getCurrentCoord() == Coord{
+				pack[i] = i+1;
+			}
+			else{
+				pack[i] = 0;
+			}
+        	}
+	}
+	void SetNum(int tmp_num){
+		num = tmp_num;
+	}
+	void SetCoord(int tmp_Coord){
+		Coord = tmp_Coord;
+	}
+};
