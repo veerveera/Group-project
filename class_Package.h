@@ -83,4 +83,4 @@ public:
 	void SetCoord(int tmp_Coord){
 		Coord = tmp_Coord;
 	}
-};
+}; 
