@@ -19,6 +19,7 @@ class Package{
     void setCurrentCoord(int coord){
       currentCoord = coord;
     };
+    int getStartCoord(){return startCoord;}
     int getCurrentCoord(){return currentCoord;};
     int getFinishCoord(){return finishCoord;};
     int getDirection(){return direction;};
@@ -44,12 +45,11 @@ public:
 		pack = new int[n];
 		for(int i=0; i<n; i++){
 			if(P[i].getCurrentCoord() == Coord){
-        pack[i] = i+1;
-        }
-      else{
-        pack[i] = 0;
-        }
-
+    			    pack[i] = i+1;
+        		}
+      			else{
+        			pack[i] = 0;
+        		}
 		}
 	}
 	~office(){}
@@ -77,19 +77,20 @@ public:
 	}
 
 	void Print(int n, Package*P){
- 	  cout << "Номер почтового отделения:" << num << endl;
-      for(int i=0; i<n; i++){
-        if(pack[i] != 0){
-          cout << "Посылка №" << i+1 << endl;
-  //      cout <<  "Откуда: " << << "  От кого: " << P[i].getSenderName() << endl;
-          cout <<  "Куда: " << P[i].getFinishCoord() << "  Кому: " << P[i].getRecipientName() << endl;
-          }
-        }
+ 		cout << "Номер почтового отделения:" << num << endl;
+   	  	for(int i=0; i<n; i++){
+        		if(pack[i] != 0){
+          			cout << "Посылка №" << i+1 << endl;
+          			cout <<  "Откуда: " << P[i].getStartCoord() << "  От кого: " << P[i].getSenderName() << endl;
+          			cout <<  "Куда: " << P[i].getFinishCoord() << "  Кому: " << P[i].getRecipientName() << endl;
+          		}
+        	}
 	}
 };
 
 class Menu{
 
+// Поиск по ФИО получателя
 	void Find1(Package* P, int n){
 		int s == 0;
 		string tmp_recipientName;
@@ -98,7 +99,7 @@ class Menu{
 		for(int i=0; i<n; i++){
 			if(tmp_recipientName == P[i].getRecipientName()){
 				cout << "Посылка №" << i+1 << endl;
-                      //  	cout <<  "Откуда: " << << "  От кого: " << P[i].getSenderName() << endl;
+                        	cout <<  "Откуда: " << P[i].getStartCoord() << "  От кого: " << P[i].getSenderName() << endl;
                         	cout <<  "Куда: " << P[i].getFinishCoord() << "  Кому: " << P[i].getRecipientName << endl;
 				s++;
 			}
@@ -108,6 +109,7 @@ class Menu{
         	}
 	}
 
+// Поиск по ФИО отправителя
 	void Find2(Package* P, int n){
 		int s = 0;
         	string tmp_senderName;
@@ -116,7 +118,7 @@ class Menu{
         	for(int i=0; i<n; i++){
         	        if(tmp_senderName == P[i].getSenderName()){
                 	        cout << "Посылка №" << i+1 << endl;
-                      //  	cout <<  "Откуда: " << << "  От кого: " << P[i].getSenderName() << endl;
+                        	cout <<  "Откуда: " << P[i].getStartCoord() << "  От кого: " << P[i].getSenderName() << endl;
                         	cout <<  "Куда: " << P[i].getFinishCoord() << "  Кому: " << P[i].getRecipientName << endl;
 				s++;
                 	}
@@ -126,7 +128,27 @@ class Menu{
         	}
 	}
 
+// Поиск по начальной координате посылки
 	void Find3(Package* P, int n){
+                int s = 0;
+                int tmp_startCoord;
+                cout << "Введите начальную координату для поиска" << endl;
+                cin >> tmp_startCoord;
+                for(int i=0; i<n; i++){
+                        if(tmp_startCoord == P[i].getStartCoord()){
+                                cout << "Посылка №" << i+1 << endl;
+                                cout <<  "Откуда: " << P[i].getStartCoord() <<>
+                                cout <<  "Куда: " << P[i].getFinishCoord() << >
+                                s++;
+                        }
+                }
+                if(s == 0){
+                        cout << "Посылка не найдена" << endl;
+                }
+        }
+
+// Поиск по конечной координате посылки
+	void Find4(Package* P, int n){
 		int s = 0;
         	int tmp_finishCoord;
         	cout << "Введите конечную координату для поиска" << endl;
@@ -134,7 +156,7 @@ class Menu{
         	for(int i=0; i<n; i++){
         	        if(tmp_finishCoord == P[i].getFinishCoord()){
         	                cout << "Посылка №" << i+1 << endl;
-                      //  	cout <<  "Откуда: " << << "  От кого: " << P[i].getSenderName() << endl;
+                        	cout <<  "Откуда: " << P[i].getStartCoord() << "  От кого: " << P[i].getSenderName() << endl;
                         	cout <<  "Куда: " << P[i].getFinishCoord() << "  Кому: " << P[i].getRecipientName << endl;
 				s++;
                 	}
@@ -144,7 +166,8 @@ class Menu{
         	}
 	}
 
-	void Find4(Office* F, int k, int n){
+// Поиск отделения по его координате
+	void Find5(Office* F, int k, int n){
 		int s = 0;
 		int tmp_Coord;
 		cout << "Введите координату отделения для поиска" << endl;
