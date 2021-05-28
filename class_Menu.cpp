@@ -4,20 +4,36 @@ void Menu::SkipTime(int& tm, int t) {
 	tm += t;
 }
 
-void Menu::updateAllPackage(std::vector<Package> allPackages, int tm) {
-	for (int i = 0; i < allPackages.size(); i++) {
-		allPackages[i].calculateCurrentCoord(tm);
+void Menu::updateAllPackage(int tm) {
+	for (int i = 0; i < this->allPackages.size(); i++) {
+		this->allPackages[i].calculateCurrentCoord(tm);
+	}
+}
+void Menu::checkDeliveryStatus() {
+	for (int i = 0; i < this->allPackages.size(); i++) {
+		bool t = false;
+		for (int j = 0; j < this->allOffices.size(); j++) {
+			
+			if (this->allPackages[i].getCurrentCoord() == this->allOffices[j].getCoord()) {
+				cout << "Package " << i + 1 << " in office " << this->allOffices[j].getNum() <<" and coord"<< this->allPackages[i].getCurrentCoord()<< endl;
+				t = true;
+				break;
+			}
+		}
+		if (!t) {
+			cout << "Package " << i + 1 << " has no office and coord"<< this->allPackages[i].getCurrentCoord()<< endl;
+		}
 	}
 }
 
-void Menu::Find1(std::vector<Package> P) {
+void Menu::Find1() {
 	int s = 0;
 	string tmp_recieverName;
 	cout << "Enter reciever name to search" << endl;
 	cin >> tmp_recieverName;
-	for (int i = 0; i < P.size(); i++) {
-		if (tmp_recieverName == P[i].getRecipientName()) {
-			P[i].Print(i);
+	for (int i = 0; i < allPackages.size(); i++) {
+		if (tmp_recieverName == allPackages[i].getRecipientName()) {
+			allPackages[i].Print(i);
 			s++;
 		}
 	}
@@ -27,14 +43,14 @@ void Menu::Find1(std::vector<Package> P) {
 }
 
 
-void Menu::Find2(std::vector<Package> P) {
+void Menu::Find2() {
 	int s = 0;
 	string tmp_senderName;
 	cout << "Enter sender name to search" << endl;
 	cin >> tmp_senderName;
-	for (int i = 0; i < P.size(); i++) {
-		if (tmp_senderName == P[i].getSenderName()) {
-			P[i].Print(i);
+	for (int i = 0; i < allPackages.size(); i++) {
+		if (tmp_senderName == allPackages[i].getSenderName()) {
+			allPackages[i].Print(i);
 			s++;
 		}
 	}
@@ -44,14 +60,14 @@ void Menu::Find2(std::vector<Package> P) {
 }
 
 
-void Menu::Find3(std::vector<Package> P) {
+void Menu::Find3() {
 	int s = 0;
 	int tmp_startCoord;
 	cout << "Enter start coord to search" << endl;
 	cin >> tmp_startCoord;
-	for (int i = 0; i < P.size(); i++) {
-		if (tmp_startCoord == P[i].getStartCoord()) {
-			P[i].Print(i);
+	for (int i = 0; i < allPackages.size(); i++) {
+		if (tmp_startCoord == allPackages[i].getStartCoord()) {
+			allPackages[i].Print(i);
 			s++;
 		}
 	}
@@ -59,14 +75,14 @@ void Menu::Find3(std::vector<Package> P) {
 		cout << "Cant find package" << endl;
 	}
 }
-void Menu::Find4(std::vector<Package> P) {
+void Menu::Find4() {
 	int s = 0;
 	int tmp_finishCoord;
 	cout << "Enter finish coord to search" << endl;
 	cin >> tmp_finishCoord;
-	for (int i = 0; i < P.size(); i++) {
-		if (tmp_finishCoord == P[i].getFinishCoord()) {
-			P[i].Print(i);
+	for (int i = 0; i < allPackages.size(); i++) {
+		if (tmp_finishCoord == allPackages[i].getFinishCoord()) {
+			allPackages[i].Print(i);
 			s++;
 		}
 	}
@@ -74,14 +90,14 @@ void Menu::Find4(std::vector<Package> P) {
 		cout << "Cant find package" << endl;
 	}
 }
-void Menu::Find5(std::vector<Office> F) {
+void Menu::Find5() {
 	int s = 0;
 	int tmp_Coord;
 	cout << "Enter Office coord to search" << endl;
 	cin >> tmp_Coord;
-	for (int i = 0; i < F.size(); i++) {
-		if (tmp_Coord == F[i].getCoord()) {
-			F[i].Print();
+	for (int i = 0; i < allOffices.size(); i++) {
+		if (tmp_Coord == allOffices[i].getCoord()) {
+			allOffices[i].Print();
 			s++;
 			break;
 		}

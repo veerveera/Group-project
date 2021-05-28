@@ -1,28 +1,37 @@
 #pragma once
 #include"class_Office.h"
-#include"class_Package.h"
 class Menu {
 
 public:
+	std::vector<Package>allPackages;
+	std::vector<Office>allOffices;
+	void readFilePackage(string filename) {
+		//read file to vector allpackage
+	}
+	void writeFilePackage(string filename) {
+		//write file to vector allpackage
+	}
 
 	void SkipTime(int& tm, int t);
 
 	//update current coord of all packages
-	void updateAllPackage(std::vector<Package> allPackages, int tm);
+	void updateAllPackage(int tm);
 
+	//cout info about offices 
+	void checkDeliveryStatus();
 
-	//Find on receiver 
-	void Find1(std::vector<Package> P); 
+	//Find on reciver
+	void Find1(); 
 
-	//Finf on sender
-	void Find2(std::vector<Package> P);
+	//Find on sender
+	void Find2();
 
 	//Find on start coord
-	void Find3(std::vector<Package> P);
+	void Find3();
 
-	//Find on  finish coord
-	void Find4(std::vector<Package> P);
+	//Find on finish coord
+	void Find4();
 
 	//Find office on coord
-	void Find5(std::vector<Office> F);
+	void Find5();
 };

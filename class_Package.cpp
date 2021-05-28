@@ -36,5 +36,5 @@ void Package::Print(int id) {
 		cout << "Package number " << id + 1 << endl;
 		cout << "From: " << this->getStartCoord() << "  Sender: " << this->getSenderName() << endl;
 		cout << "To: " << this->getFinishCoord() << "  Reciever: " << this->getRecipientName() << endl;
-	}
-};
+}
+

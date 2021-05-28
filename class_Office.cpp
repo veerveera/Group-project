@@ -4,7 +4,7 @@
 
 
 int Office::getCoord() { return Coord; }
-	vector<Package> getPack() { return pack; }
+vector<Package> Office::getPack() { return pack; }
 
 int Office::getNum() { return num; }
 
@@ -12,8 +12,10 @@ void Office::SetPack(vector<Package> P) {
 		pack.clear();
 		for (int i = 0; i < P.size(); i++) {
 			if (P[i].getCurrentCoord() == Coord) {
-				pack.push_back(P[i]);}
-						   }}
+				pack.push_back(P[i]);
+			}
+		}
+}
 
 void Office::SetNum(int tmp_num) {
 		num = tmp_num;}

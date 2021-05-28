@@ -30,6 +30,7 @@ public:
 
 	int getCoord();
 	int getNum();
+	vector<Package> getPack();
 
 	void SetPack(vector<Package> P);
 	void SetNum(int tmp_num);
