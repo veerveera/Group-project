@@ -32,9 +32,11 @@ string Package::getRecipientName(){return recipientName;};
 
 string Package::getSenderName(){return senderName;};
 
-void Package::Print(int id) {
-		cout << "Package number " << id + 1 << endl;
+int Package::getId(){return id;};
+
+void Package::Print() {
+		cout << "Package number " << id << endl;
 		cout << "From: " << this->getStartCoord() << "  Sender: " << this->getSenderName() << endl;
 		cout << "To: " << this->getFinishCoord() << "  Reciever: " << this->getRecipientName() << endl;
-}
+	};
 

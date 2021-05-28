@@ -4,6 +4,7 @@
 #include<vector>
 using namespace std;
 
+int Package::s_idGenerator = 1;
 
 int main() {
 	Menu mainMenu;

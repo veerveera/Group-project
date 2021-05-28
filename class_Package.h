@@ -6,6 +6,8 @@ using namespace std;
 class Package {
 
 private:
+  static int idGenerator;
+  int id;
 	int startCoord;
 	int currentCoord;
 	int currentTime;
@@ -27,6 +29,7 @@ public:
 		direction = (finishCoord - startCoord) / abs((finishCoord - startCoord));
 		recipientName = tmp_recipientName;
 		senderName = tmp_senderName;
+    id = s_idGenerator++;
 	};
 
 	void setCurrentCoord(int coord);
@@ -42,5 +45,5 @@ public:
 	int getDirection();
 	string getRecipientName();
 	string getSenderName();
-	void Print(int id);
+	void Print();
 };

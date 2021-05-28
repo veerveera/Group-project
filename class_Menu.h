@@ -5,12 +5,10 @@ class Menu {
 public:
 	std::vector<Package>allPackages;
 	std::vector<Office>allOffices;
-	void readFilePackage(string filename) {
-		//read file to vector allpackage
-	}
-	void writeFilePackage(string filename) {
-		//write file to vector allpackage
-	}
+
+	void setDatabases(fstream packages, fstream offices);
+
+  void updateDatabases(fstream &packages, fstream &offices);
 
 	void SkipTime(int& tm, int t);
 
@@ -34,4 +32,6 @@ public:
 
 	//Find office on coord
 	void Find5();
+
+  void addPackage();
 };
