@@ -1,35 +1,44 @@
 #include <cmath>
 #include <string>
-
 using namespace std;
 
 class Package{
 
-  private:
-    int startCoord;
-    int currentCoord;
-    int finishCoord;
-    int direction;
-    string recipientName;
-    string senderName;
+private:
+int startCoord;
+int currentCoord;
+int currentTime;
+int finishCoord;
+int direction;
+int startTime;
+int delieveryTime;
+string recipientName;
+string senderName;
 
-  public:
+public:
 
-    Package(int tmp_currentCoord, int tmp_finishCoord, string tmp_recipientName, string tmp_senderName){
-      currentCoord = tmp_currentCoord;
-      finishCoord = tmp_finishCoord;
-      direction = (finishCoord-currentCoord)/abs((finishCoord-currentCoord));
-      recipientName = tmp_recipientName;
-      senderName = tmp_senderName;
-      };
+Package(int tmp_startCoord, int tmp_finishCoord, int tmp_startTime, int tmp_delieveryTime, string tmp_recipientName, string tmp_senderName) {
+	startCoord = tmp_startCoord;
+	currentCoord = tmp_startCoord;
+	finishCoord = tmp_finishCoord;
+	startTime = tmp_startTime;
+	delieveryTime = tmp_delieveryTime;
+	direction = (finishCoord- startCoord)/abs((finishCoord- startCoord));
+	recipientName = tmp_recipientName;
+	senderName = tmp_senderName;
+        };
     
-    void setCurrentCoord(int coord){
-      currentCoord = coord;
-    };
+void setCurrentCoord(int coord);
 
-    int getCurrentCoord(){return currentCoord;};
-    int getFinishCoord(){return finishCoord;};
-    int getDirection(){return direction;};
-    string getRecipientName(){return recipientName;};
-    string getSenderName(){return senderName;};
-  };
+void calculateCurrentCoord(int t);
+
+bool isPackageDelivered();
+
+int getCurrentTime();
+int getStartCoord();
+int getCurrentCoord();
+int getFinishCoord();
+int getDirection();
+string getRecipientName();
+string getSenderName();
+void Print(int id);
