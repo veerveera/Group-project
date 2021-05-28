@@ -189,3 +189,46 @@ void Menu::addPackage(){
     }
   }
 }
+
+void Menu::delPackage(int id){
+  for(i=0; i<=allPackages.size(); i++){
+    if(id == allPackages[i].getId()){
+      allPackages.erase(allPackages.begin()+i);
+      break;
+    }
+  }
+  for(i=0; i<=allOffices.size(); i++){
+    for(j=0; j<=allOffices[i].getPack.size(); i++){
+      if(id == allOffices[i].getPack[j].getId()){
+        vector<Package> tmp_vec = allOffices[i].getPack;
+        tmp_vec.erase(tmp_vec.begin()+i);
+        allOffices[i].setPack(tmp_vec);
+        break;
+      }
+    }
+  }
+}
+
+void Menu::addOffice(){
+  int num;
+  int coord;
+  cin << num;
+  cin << coord;
+  Office newOffice = Office(num, coord);
+}
+
+void Menu::delOffice(int num){
+  for(i=0, i<=allOffices.size(); i++){
+    if(num == allOffices[i].getNum()){
+      for(j=0; j<=allOffices[i].getPack().size()){
+        for(k=0; k<=allPackages.size(); k++){
+          if(allOffices[i].getPack[j].getId() == allPackages[k].get[id]){
+            allPackages.erase(allPackages.begin()+k);
+          }
+        }
+      }
+      allOffices.erase(allOffices.begin()+i);
+      break;
+    }
+  }
+}

@@ -17,14 +17,9 @@ public:
 		Coord = 0;
 		num = 0;
 	}
-	Office(int tmp_num, int tmp_Coord, vector<Package> P) {
+	Office(int tmp_num, int tmp_Coord) {
 		num = tmp_num;
 		Coord = tmp_Coord;
-		for (int i = 0; i < P.size(); i++) {
-			if (P[i].getCurrentCoord() == Coord) {
-				pack.push_back(P[i]);
-			}
-		}
 	}
 	~Office() {}
 

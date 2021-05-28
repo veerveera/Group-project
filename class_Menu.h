@@ -34,4 +34,10 @@ public:
 	void Find5();
 
   void addPackage();
+
+  void delPackage(int id);
+
+  void addOffice();
+
+  void delOffice(int num);
 };
