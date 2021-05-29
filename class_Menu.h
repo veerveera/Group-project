@@ -40,4 +40,8 @@ public:
   void addOffice();
 
   void delOffice(int num);
+
+  void ViewPackages();
+
+  void ViewOffices();
 };

@@ -88,7 +88,8 @@ void Menu::Find1() {
 	cin >> tmp_recieverName;
 	for (int i = 0; i < allPackages.size(); i++) {
 		if (tmp_recieverName == allPackages[i].getRecipientName()) {
-			allPackages[i].Print(i);
+			allPackages[i].Print();
+			cout << "------------------------------" << endl;
 			s++;
 		}
 	}
@@ -105,7 +106,8 @@ void Menu::Find2() {
 	cin >> tmp_senderName;
 	for (int i = 0; i < allPackages.size(); i++) {
 		if (tmp_senderName == allPackages[i].getSenderName()) {
-			allPackages[i].Print(i);
+			allPackages[i].Print();
+			cout << "------------------------------" << endl;
 			s++;
 		}
 	}
@@ -122,7 +124,8 @@ void Menu::Find3() {
 	cin >> tmp_startCoord;
 	for (int i = 0; i < allPackages.size(); i++) {
 		if (tmp_startCoord == allPackages[i].getStartCoord()) {
-			allPackages[i].Print(i);
+			allPackages[i].Print();
+			cout << "------------------------------" << endl;
 			s++;
 		}
 	}
@@ -137,7 +140,8 @@ void Menu::Find4() {
 	cin >> tmp_finishCoord;
 	for (int i = 0; i < allPackages.size(); i++) {
 		if (tmp_finishCoord == allPackages[i].getFinishCoord()) {
-			allPackages[i].Print(i);
+			allPackages[i].Print();
+			cout << "------------------------------" << endl;
 			s++;
 		}
 	}
@@ -231,4 +235,19 @@ void Menu::delOffice(int num){
       break;
     }
   }
+}
+
+void Menu::ViewPackages(){
+        for (int i = 0; i < allPackages.size(); i++) {
+                allPackages[i].Print();
+                cout << "------------------------------" << endl;
+
+        }
+}
+
+void Menu::ViewOffices(){
+        for (int i = 0; i < allOffices.size(); i++) {
+                allOffices[i].Print();
+                cout << "------------------------------" << endl;
+        }
 }

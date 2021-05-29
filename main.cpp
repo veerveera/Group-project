@@ -73,8 +73,12 @@ int main() {
 		case 9:{
 			mainMenu.Find5();
 			}
-		case 10:
-		case 11:
+		case 10:{
+			mainMenu.ViewOffices();
+			}
+		case 11:{
+			mainMenu.ViewPackages();
+			}
 		case 0:
 			break;
 		default:
