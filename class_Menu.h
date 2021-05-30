@@ -1,19 +1,23 @@
 #pragma once
 #include"class_Office.h"
 class Menu {
-
+private:
+	int tm; //worldtime
 public:
+	Menu() {
+		tm = 0;
+	}
 	std::vector<Package>allPackages;
 	std::vector<Office>allOffices;
 
-	void setDatabases(fstream packages, fstream offices);
+	void setDatabases(ifstream& packages, ifstream& offices);
 
-  void updateDatabases(fstream &packages, fstream &offices);
+  void updateDatabases(ofstream& packages, ofstream& offices);
 
-	void SkipTime(int& tm, int t);
-
+	void SkipTime(int t);
+	int getTime();
 	//update current coord of all packages
-	void updateAllPackage(int tm);
+	void updateAllPackage();
 
 	//cout info about offices 
 	void checkDeliveryStatus();
@@ -44,4 +48,6 @@ public:
   void ViewPackages();
 
   void ViewOffices();
+
+  void deleteDeliveredPackages();
 };

@@ -1,73 +1,58 @@
 #include"class_Menu.h"
-
-void Menu::setDatabases(fstream packages, fstream offices){
-  int it = 0;
-  int tmp_int[5];
+#include<fstream>
+void Menu::setDatabases(ifstream& packages, ifstream& offices){
+  int tmp_int[4];
   string tmp_str[2];
-  while(!packages.eof()){  
-    getline(packages, tmp_int[0], ' ');
-    getline(packages, tmp_int[1], ' ');
-    getline(packages, tmp_int[2], ' ');
-    getline(packages, tmp_int[3], ' ');
-    getline(packages, tmp_int[4], ' ');
-    getline(packages, tmp_str[0], ' ');
-    getline(packages, tmp_str[1], '\n');
-    allPackages[t] = Package(tmp_int[0], tmp_int[1], tmp_int[3], tmp_int[4], tmp_str[0], tmp_str[1])
-    it++;
-  it = 0;  
-  while(!offices.eof()){
-    getline(offices, tmp_int[0], ' ');
-    getline(offices, tmp_int[1], ' ');
-
-    getline(offices, tmp_str[0], '\n');
-    int * pch = strtok (str," "); 
-    int idArr[] = new int;
-    vector<Package>tmp_vec;
-    while (pch != NULL){
-      idArr.push_back(pch);
-      pch = strtok (NULL, " ");
-    }
-    delete pch;
-    for(i=0; i<=idArr.size();i++){
-      for(j=0; j<=allPackages.size(); j++){
-        if(idArr[i] == allPackages[j].getId()){
-          tmp_vec.pushback(allPackages[j]);
-        }
-      }
-    }
-
-    allOffices[t] = Office(tmp_int[0], tmp_int[1], tmp.vec)
-    delete idArr;
-    it++;
+  int n;
+  packages >> n;
+  while (n) {
+	  n--;
+	  packages >> tmp_int[0];
+	  packages >> tmp_int[1];
+	  packages >> tmp_int[2];
+	  packages >> tmp_int[3];
+	  packages >> tmp_str[0];
+	  packages >> tmp_str[1];
+	  allPackages.push_back(Package(tmp_int[0], tmp_int[1], tmp_int[2], tmp_int[3], tmp_str[0], tmp_str[1]));
+  }
+  int tmp_int2[2];
+  offices >> n;
+  while (n) {
+	  n--;
+    offices>>tmp_int2[0];
+	offices>>tmp_int2[1];
+	allOffices.push_back(Office(tmp_int2[0], tmp_int2[1]));
   }
 }
 
-void Menu::updateDatabases(fstream &packages, fstream &offices){
-  for(i=0; i<=allPackages.size(); i++){
-    *packages << allPackages[i].getStartCoord << allPackages[i].getFinishCoord << allPackages[i].getCurrentCoord << allPackages[i].getStartTime << allPackages[i].getDelieveryTime << allPackages[i].getRecipientCoord << allPackages[i].getSenderCoord << endl;
+void Menu::updateDatabases(ofstream& packages, ofstream& offices){
+	packages << allPackages.size() << endl;
+  for(size_t i=0; i<allPackages.size(); i++){
+	  packages << allPackages[i].getStartCoord() << ' ' << allPackages[i].getFinishCoord() << ' ' << allPackages[i].getStartTime() << ' ' << allPackages[i].getDeliveryTime() << ' ' << allPackages[i].getSenderName() << ' ' << allPackages[i].getRecipientName() << endl;
   }
-  for(i=0; i<=allOffices.size(); i++){
-    *offices << allOffices[i].getNum() << allOffices[i].getCoord();
-    for(j=0; j<allOffices[i].getPack().size(); j++){
-      *offices << allOffices[i].getPack()[j].getId;
-    }
-    *offices << "/n";
+  offices << allOffices.size() << endl;
+  for(size_t i=0; i<allOffices.size(); i++){
+   offices << allOffices[i].getNum() <<' '<< allOffices[i].getCoord();
+    offices << "\n";
   }
 }
 
-void Menu::SkipTime(int& tm, int t) {
+void Menu::SkipTime(int t) {
 	tm += t;
 }
 
-void Menu::updateAllPackage(int tm) {
-	for (int i = 0; i < this->allPackages.size(); i++) {
+int Menu::getTime() {
+	return this->tm;
+}
+void Menu::updateAllPackage() {
+	for (size_t i = 0; i < this->allPackages.size(); i++) {
 		this->allPackages[i].calculateCurrentCoord(tm);
 	}
 }
 void Menu::checkDeliveryStatus() {
-	for (int i = 0; i < this->allPackages.size(); i++) {
+	for (size_t i = 0; i < this->allPackages.size(); i++) {
 		bool t = false;
-		for (int j = 0; j < this->allOffices.size(); j++) {
+		for (size_t j = 0; j < this->allOffices.size(); j++) {
 			
 			if (this->allPackages[i].getCurrentCoord() == this->allOffices[j].getCoord()) {
 				cout << "Package " << i + 1 << " in office " << this->allOffices[j].getNum() <<" and coord"<< this->allPackages[i].getCurrentCoord()<< endl;
@@ -86,7 +71,7 @@ void Menu::Find1() {
 	string tmp_recieverName;
 	cout << "Enter reciever name to search" << endl;
 	cin >> tmp_recieverName;
-	for (int i = 0; i < allPackages.size(); i++) {
+	for (size_t i = 0; i < allPackages.size(); i++) {
 		if (tmp_recieverName == allPackages[i].getRecipientName()) {
 			allPackages[i].Print();
 			cout << "------------------------------" << endl;
@@ -104,7 +89,7 @@ void Menu::Find2() {
 	string tmp_senderName;
 	cout << "Enter sender name to search" << endl;
 	cin >> tmp_senderName;
-	for (int i = 0; i < allPackages.size(); i++) {
+	for (size_t i = 0; i < allPackages.size(); i++) {
 		if (tmp_senderName == allPackages[i].getSenderName()) {
 			allPackages[i].Print();
 			cout << "------------------------------" << endl;
@@ -122,7 +107,7 @@ void Menu::Find3() {
 	int tmp_startCoord;
 	cout << "Enter start coord to search" << endl;
 	cin >> tmp_startCoord;
-	for (int i = 0; i < allPackages.size(); i++) {
+	for (size_t i = 0; i < allPackages.size(); i++) {
 		if (tmp_startCoord == allPackages[i].getStartCoord()) {
 			allPackages[i].Print();
 			cout << "------------------------------" << endl;
@@ -138,7 +123,7 @@ void Menu::Find4() {
 	int tmp_finishCoord;
 	cout << "Enter finish coord to search" << endl;
 	cin >> tmp_finishCoord;
-	for (int i = 0; i < allPackages.size(); i++) {
+	for (size_t i = 0; i < allPackages.size(); i++) {
 		if (tmp_finishCoord == allPackages[i].getFinishCoord()) {
 			allPackages[i].Print();
 			cout << "------------------------------" << endl;
@@ -154,7 +139,7 @@ void Menu::Find5() {
 	int tmp_Coord;
 	cout << "Enter Office coord to search" << endl;
 	cin >> tmp_Coord;
-	for (int i = 0; i < allOffices.size(); i++) {
+	for (size_t i = 0; i < allOffices.size(); i++) {
 		if (tmp_Coord == allOffices[i].getCoord()) {
 			allOffices[i].Print();
 			s++;
@@ -169,68 +154,56 @@ void Menu::Find5() {
 void Menu::addPackage(){
   int startCoord;
   int finishCoord;
-  int startTime;
-  int delieveryTime;
+ 
+  int deliveryTime;
   string recipientName;
-  string senderName
-  int offNum;
+  string senderName;
+  cout << "Enter start coord: " << endl;
+  cin >> startCoord;
 
-  cin << startCoord;
-  cin << FinishCoord;
-  cin << startTime;
-  cin << delieveryTime;
-  cin << recipientName;
-  cin << senderName;
-  cin << offNum;
+  cout << "Enter finish coord: " << endl;
+  cin >> finishCoord;
+  cout << "Enter delivery time: " << endl;
+  cin >> deliveryTime;
+  cout << "Enter recipient name: " << endl;
+  cin >> recipientName;
+  
+  cout << "Enter sender name: " << endl;
+  cin >> senderName;
 
-  Package newPackage = Package(startCoord, finishCoord, startTime, deieveryTime, recipientName, senderName);
+  Package newPackage = Package(startCoord, finishCoord, this->tm, deliveryTime, recipientName, senderName);
   allPackages.push_back(newPackage);
   
-  for(i = 0; i<=allOffices.size(); i++){
-    if(offNum == allOffices[i].getNum()){
-      vector<Package> tmpVec = allOffices[i].getPack;
-      tmpVec.push_back(newPackage);
-    }
-  }
+  
 }
 
-void Menu::delPackage(int id){
-  for(i=0; i<=allPackages.size(); i++){
-    if(id == allPackages[i].getId()){
-      allPackages.erase(allPackages.begin()+i);
-      break;
-    }
-  }
-  for(i=0; i<=allOffices.size(); i++){
-    for(j=0; j<=allOffices[i].getPack.size(); i++){
-      if(id == allOffices[i].getPack[j].getId()){
-        vector<Package> tmp_vec = allOffices[i].getPack;
-        tmp_vec.erase(tmp_vec.begin()+i);
-        allOffices[i].setPack(tmp_vec);
-        break;
-      }
-    }
-  }
+void Menu::delPackage(int id) {
+
+	for (size_t i = 0; i < allPackages.size(); i++) {
+		if (id == allPackages[i].getId()) {
+			allPackages.erase(allPackages.begin() + i);
+			break;
+		}
+	}
 }
 
 void Menu::addOffice(){
   int num;
   int coord;
-  cin << num;
-  cin << coord;
+  cout<<"Enter number of office: "<<endl;
+  cin >> num;
+
+  cout << "Enter coordinate of office: " << endl;
+  cin >> coord;
   Office newOffice = Office(num, coord);
+  allOffices.push_back(newOffice);
 }
 
 void Menu::delOffice(int num){
-  for(i=0, i<=allOffices.size(); i++){
+	
+	for (size_t i = 0; i < allOffices.size(); i++) {
     if(num == allOffices[i].getNum()){
-      for(j=0; j<=allOffices[i].getPack().size()){
-        for(k=0; k<=allPackages.size(); k++){
-          if(allOffices[i].getPack[j].getId() == allPackages[k].get[id]){
-            allPackages.erase(allPackages.begin()+k);
-          }
-        }
-      }
+   
       allOffices.erase(allOffices.begin()+i);
       break;
     }
@@ -238,7 +211,7 @@ void Menu::delOffice(int num){
 }
 
 void Menu::ViewPackages(){
-        for (int i = 0; i < allPackages.size(); i++) {
+        for (size_t i = 0; i < allPackages.size(); i++) {
                 allPackages[i].Print();
                 cout << "------------------------------" << endl;
 
@@ -246,8 +219,18 @@ void Menu::ViewPackages(){
 }
 
 void Menu::ViewOffices(){
-        for (int i = 0; i < allOffices.size(); i++) {
+        for (size_t i = 0; i < allOffices.size(); i++) {
                 allOffices[i].Print();
                 cout << "------------------------------" << endl;
         }
+}
+
+
+void Menu::deleteDeliveredPackages() {
+	for (int i = 0; i < allPackages.size(); i++) {
+		if (allPackages[i].getCurrentCoord() == allPackages[i].getFinishCoord()) {
+			allPackages.erase(allPackages.begin() + i);
+			i--;
+		}
+	}
 }

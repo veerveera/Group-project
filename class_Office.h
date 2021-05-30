@@ -9,8 +9,7 @@ class Office {
 private:
 	int num; //number office
 	int Coord; //coord of office
-	vector<Package> pack;
-	// int *pack; //massiv
+	
 public:
 
 	Office() {
@@ -25,9 +24,7 @@ public:
 
 	int getCoord();
 	int getNum();
-	vector<Package> getPack();
-
-	void SetPack(vector<Package> P);
+	
 	void SetNum(int tmp_num);
 	void SetCoord(int tmp_Coord);
 
