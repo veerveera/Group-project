@@ -5,10 +5,6 @@ using namespace std;
 
 	static int idGenerator;
 
-/*!
- *	This is a class containing information about the package: start and finish coordinates, names of the sender and recipient, time for delivery.
- */
-
 class Package {
 
 private:
@@ -52,4 +48,9 @@ public:
 	string getRecipientName();
 	string getSenderName();
 	void Print();
+<<<<<<< HEAD
 };
+=======
+	/*bool operator ==(const Package &pack1, const Package &pack2);*/
+};
+>>>>>>> e52d802628902074514eab8429c6027207256055
