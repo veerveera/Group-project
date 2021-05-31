@@ -1,53 +1,52 @@
 #pragma once
 #include"class_Office.h"
+
+/*!
+ *	This is a class containing functions for working with databases of packages and post offices.
+ */
+
 class Menu {
 private:
 	int tm; //worldtime
 public:
 	Menu() {
 		tm = 0;
-	}
+	}	//!< Constructor
 	std::vector<Package>allPackages;
 	std::vector<Office>allOffices;
 
-	void setDatabases(ifstream& packages, ifstream& offices);
+	void setDatabases(ifstream& packages, ifstream& offices);	//!< 
 
-  void updateDatabases(ofstream& packages, ofstream& offices);
+        void updateDatabases(ofstream& packages, ofstream& offices);		//!< update databases
 
-	void SkipTime(int t);
+	void SkipTime(int t);		//!< Skip time.
 	int getTime();
-	//update current coord of all packages
-	void updateAllPackage();
 
-	//cout info about offices 
-	void checkDeliveryStatus();
+	void updateAllPackage();	//!< Update current coord of all packages.
 
-	//Find on reciver
-	void Find1(); 
+	void checkDeliveryStatus();	//!< Cout info about offices.
 
-	//Find on sender
-	void Find2();
+	void Find1();		//!< Find on reciver.
 
-	//Find on start coord
-	void Find3();
+	void Find2();		//!< Find on sender.
 
-	//Find on finish coord
-	void Find4();
+	void Find3();		//!< Find on start coord.
 
-	//Find office on coord
-	void Find5();
+	void Find4();		//!< Find on finish coord.
 
-  void addPackage();
+	void Find5();		//!< Find office on coord.
 
-  void delPackage(int id);
+  void addPackage();		//!< Add a package.
 
-  void addOffice();
+  void delPackage(int id);	//!< Delete a package.
 
-  void delOffice(int num);
+  void addOffice();		//!< Add a post office.
 
-  void ViewPackages();
+  void delOffice(int num);	//!< Delete a post office.
 
-  void ViewOffices();
+  void ViewPackages();		//!< Print all packages.
+
+  void ViewOffices();		//!< Print all offices.
 
   void deleteDeliveredPackages();
 };

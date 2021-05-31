@@ -4,10 +4,15 @@
 using namespace std;
 
 	static int idGenerator;
+
+/*!
+ *	This is a class containing information about the package: start and finish coordinates, names of the sender and recipient, time for delivery.
+ */
+
 class Package {
 
 private:
-  int id;
+  	int id;
 	int startCoord;
 	int currentCoord;
 	int currentTime;

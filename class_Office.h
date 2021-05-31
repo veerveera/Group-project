@@ -4,6 +4,11 @@
 #include<vector>
 #include"class_Package.h"
 using namespace std;
+
+/*!
+ *	This is a class containing information about the post office: the number of the post office and its coordinate.
+ */
+
 class Office {
 
 private:
