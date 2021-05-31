@@ -2,6 +2,7 @@
 #include<string>
 #include<iostream>
 #include<vector>
+#include<algorithm>
 #include"class_Package.h"
 using namespace std;
 class Office {
@@ -9,10 +10,12 @@ class Office {
 private:
 	int num; //number office
 	int Coord; //coord of office
+	vector<Package> pack;
 	
 public:
 
-	Office() {
+	Office() 
+	{
 		Coord = 0;
 		num = 0;
 	}
@@ -30,6 +33,13 @@ public:
 
 	void Print();
 
+	void addPackage(Package package);
+
+	void removePackage(Package package);
+
+	vector<Package> getPack();
+
+	//bool hasThisPackage(Package package);
 };
 
 

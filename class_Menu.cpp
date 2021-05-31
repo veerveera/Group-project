@@ -23,6 +23,17 @@ void Menu::setDatabases(ifstream& packages, ifstream& offices){
 	offices>>tmp_int2[1];
 	allOffices.push_back(Office(tmp_int2[0], tmp_int2[1]));
   }
+
+  for (int i = 0; i < allPackages.size(); i++)
+  {
+	  for(int j = 0; j < allOffices.size(); j++)
+	  {
+		  if (allPackages[i].getCurrentCoord() == allOffices[j].getCoord())
+		  {
+			allOffices[j].addPackage(allPackages[i]);
+		  }
+	  }
+  }
 }
 
 void Menu::updateDatabases(ofstream& packages, ofstream& offices){
@@ -45,8 +56,27 @@ int Menu::getTime() {
 	return this->tm;
 }
 void Menu::updateAllPackage() {
-	for (size_t i = 0; i < this->allPackages.size(); i++) {
+	for (size_t i = 0; i < this->allPackages.size(); i++) 
+	{
 		this->allPackages[i].calculateCurrentCoord(tm);
+	}
+
+	for (int i = 0; i < allPackages.size(); i++)
+	{
+		for (int j = 0; j < allOffices.size(); j++)
+		{
+			if (allPackages[i].isPackageDelivered())
+			{
+				if (allPackages[i].getCurrentCoord() == allOffices[j].getCoord())
+				{
+					allOffices[j].addPackage(allPackages[i]);
+				}
+				if (allPackages[i].getCurrentCoord() != allOffices[j].getCoord())
+				{
+					allOffices[j].removePackage(allPackages[i]);
+				}
+			}
+		}
 	}
 }
 void Menu::checkDeliveryStatus() {
@@ -55,13 +85,13 @@ void Menu::checkDeliveryStatus() {
 		for (size_t j = 0; j < this->allOffices.size(); j++) {
 			
 			if (this->allPackages[i].getCurrentCoord() == this->allOffices[j].getCoord()) {
-				cout << "Package " << i + 1 << " in office " << this->allOffices[j].getNum() <<" and coord"<< this->allPackages[i].getCurrentCoord()<< endl;
+				cout << "Package " << i + 1 << " in office " << this->allOffices[j].getNum() <<" and coord "<< this->allPackages[i].getCurrentCoord()<< endl;
 				t = true;
 				break;
 			}
 		}
 		if (!t) {
-			cout << "Package " << i + 1 << " has no office and coord"<< this->allPackages[i].getCurrentCoord()<< endl;
+			cout << "Package " << i + 1 << " has no office and coord "<< this->allPackages[i].getCurrentCoord()<< endl;
 		}
 	}
 }
@@ -173,18 +203,33 @@ void Menu::addPackage(){
 
   Package newPackage = Package(startCoord, finishCoord, this->tm, deliveryTime, recipientName, senderName);
   allPackages.push_back(newPackage);
-  
-  
+
+  if (!allOffices.empty())
+  {
+	  for (int i = 0; i < allOffices.size(); i++)
+	  {
+		  if (allOffices[i].getCoord() == newPackage.getCurrentCoord())
+		  {
+			  allOffices[i].addPackage(newPackage);
+		  }
+	  }
+  }
 }
 
-void Menu::delPackage(int id) {
+void Menu::delPackage(int id) 
+{
+	int counter = 0;
 
 	for (size_t i = 0; i < allPackages.size(); i++) {
-		if (id == allPackages[i].getId()) {
+		if (id == allPackages[i].getId()) 
+		{
 			allPackages.erase(allPackages.begin() + i);
+			counter++;
 			break;
 		}
 	}
+
+	if (counter < 1) cout << "Incorrect input!" << endl;
 }
 
 void Menu::addOffice(){
@@ -219,7 +264,8 @@ void Menu::ViewPackages(){
 }
 
 void Menu::ViewOffices(){
-        for (size_t i = 0; i < allOffices.size(); i++) {
+        for (size_t i = 0; i < allOffices.size(); i++) 
+		{
                 allOffices[i].Print();
                 cout << "------------------------------" << endl;
         }
@@ -227,10 +273,25 @@ void Menu::ViewOffices(){
 
 
 void Menu::deleteDeliveredPackages() {
-	for (int i = 0; i < allPackages.size(); i++) {
+	for (int i = 0; i < allPackages.size(); i++) 
+	{
+		for (int j = 0; j < allOffices.size(); j++)
+		{
+			vector<Package> tempVector = allOffices[j].getPack();
+
+			for (int k = 0; k < tempVector.size(); k++)
+			{
+				if (allPackages[i].isPackageDelivered() && tempVector[k].getId() == allPackages[i].getId())
+				{
+					allOffices[j].removePackage(allPackages[i]);
+				} 
+			}
+		}
+
 		if (allPackages[i].getCurrentCoord() == allPackages[i].getFinishCoord()) {
 			allPackages.erase(allPackages.begin() + i);
 			i--;
 		}
+
 	}
 }

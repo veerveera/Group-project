@@ -5,13 +5,15 @@ void Package::setCurrentCoord(int coord){
       currentCoord = coord;
     };
 
-void Package::calculateCurrentCoord(int t) {
+void Package::calculateCurrentCoord(int t) 
+{
 		currentTime = t;
 		float k = float(t-startTime) / float(deliveryTime);
 
 		if (k >= 1) {currentCoord = finishCoord;}
 
-		else {currentCoord = (finishCoord - startCoord) * direction * k;}}
+		else {currentCoord = (finishCoord - startCoord) * direction * k;}
+}
 
 bool Package::isPackageDelivered() {
 return currentCoord == finishCoord;
@@ -41,5 +43,11 @@ void Package::Print() {
 		cout << "To: " << this->getFinishCoord() << "  Reciever: " << this->getRecipientName() << endl;
 		cout << "Days for delivery: " << this->getDeliveryTime() << endl;
 		if (this->getCurrentCoord() == this->getFinishCoord()) cout << "Package has been delivered" << endl;
-	};
+};
 
+/* bool Package::operator == (const Package &pack1, const Package &pack2)
+{
+	if (pack1.currentCoord == pack2.currentCoord &&
+	pack1.)
+};
+*/

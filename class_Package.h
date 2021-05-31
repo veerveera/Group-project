@@ -47,4 +47,5 @@ public:
 	string getRecipientName();
 	string getSenderName();
 	void Print();
+	/*bool operator ==(const Package &pack1, const Package &pack2);*/
 };
