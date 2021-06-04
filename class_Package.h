@@ -64,9 +64,5 @@ public:
 	string getSenderName();
 	//! Выводит на экран информацию о посылке
 	void Print();
-<<<<<<< HEAD
-};
-=======
 	/*bool operator ==(const Package &pack1, const Package &pack2);*/
 };
->>>>>>> e52d802628902074514eab8429c6027207256055
